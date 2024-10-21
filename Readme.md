@@ -35,3 +35,35 @@ console.log(process.argv);
 # The path module in Node.js provides utilities for working with file and directory paths. It allows you to interact with file system paths in a cross-platform way, handling things like concatenating paths, resolving relative paths, and extracting parts of a path (like the directory name or file extension).
 
 # This path module help to find the path of the directory and then create a file there with the help of fs.
+
+# The node.js works as Call stack => Node Api's => Call back queue.
+
+1. Call Stack
+   The call stack is like a to-do list for functions. It follows a LIFO (Last In, First Out) order, meaning that functions are pushed onto the stack when they're called and popped off when they're finished.
+
+Whenever you call a function, it gets added (or "pushed") onto the call stack.
+When that function finishes, it gets removed (or "popped") from the stack.
+
+2. Node APIs
+   Node.js introduces asynchronous features (non-blocking) using Node APIs like fs (for file system), http, setTimeout(), etc.
+
+When an asynchronous function is called, Node.js offloads that task to a Node API (which could be the file system, a database, or a timer).
+
+3. Callback Queue
+   After the Node API (like setTimeout() or fs.readFile()) finishes its task, it adds the callback (the code that should run after the task is done) to the callback queue.
+
+The callback queue is a list of tasks that are ready to be executed. But they don't run until the call stack is empty.
+
+Once the stack is clear, Node.js uses an event loop to move callbacks from the callback queue to the call stack, where they are executed.
+
+Continuing from the previous setTimeout example:
+
+After 2 seconds, the callback () => { console.log('Timer done'); } is added to the callback queue.
+The event loop checks if the call stack is empty (which it is after console.log('End')).
+The callback is then moved to the call stack, where it runs, logging "Timer done".
+
+4. Event Loop
+   The event loop is the core of Node.js's asynchronous behavior. It constantly monitors the call stack and the callback queue.
+
+If the call stack is empty, the event loop will push the first task from the callback queue onto the stack.
+The event loop ensures non-blocking behavior, allowing Node.js to handle other operations (e.g., timers, file system calls) while waiting for asynchronous tasks to complete.
