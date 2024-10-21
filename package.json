@@ -1,0 +1,20 @@
+{
+  "name": "node_tuts",
+  "version": "1.0.0",
+  "description": "A basic code of backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "js",
+    "node",
+    "backend"
+  ],
+  "author": "amit bhandari",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.7"
+  }
+}
