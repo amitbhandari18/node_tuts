@@ -138,3 +138,126 @@ fs.readdir(dirPath, (err, files) => {
 // //     console.log(err);
 
 // // }) // used to delete the file.
+
+
+// Asynchronus programming ==========================
+
+// let a = 10;
+// let b = 0;
+
+// setTimeout(() => {
+//     b = 20;
+// }, 2000);
+
+// console.log(a + b);
+
+
+// Here in this task we change the value of b =20 so the result have to be 30 but it comes 10 because of asynchronous programming.So in this situation we use promise or async await.
+
+let a = 20;
+let b = 0;
+
+var waitingData = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(30);
+    }, 2000)
+});
+
+waitingData.then(data => {
+    b = data;
+    console.log(a + b);
+});
+
+// The result became 50 that's how we use promise.
+
+
+This is how we take the input from the local host and make change there.
+
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+    console.log(`data send by browser`, req.query.name); // the req.query contains the data sent by the browser (http://localhost:3000/?name=amit).
+    we applied qurey here because (?name=amit  THESE ARE CALLED QUERY PARAMETERS).
+
+    res.send('Hello World!' + req.query.name);
+});
+
+app.listen(3000, () => {
+    console.log("server is connected !!!!");
+})
+
+
+
+HERE WE CAME TO KNOW THAT HOW CAN WE ADD HTML TAGS AND JSON DATA IN OUR NODE JS.
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+
+    res.send(`<h1> Home Page </h1>
+        <a href="/about">About</a>
+        `);
+});
+app.get('/about', (req, res) => {
+
+    res.send(`<input type="text" placeholder="Enter your name" value="${req.query.name}"/>
+        <button>Click Me</button>
+                <a href="/">home</a>
+        `);
+});
+app.get('/help', (req, res) => {
+
+    res.send([
+        {
+            name: "amit",
+            email: "amit@gmail.com",
+        },
+        {
+            name: "shubham",
+            email: "shubham@gmail.com",
+        }, {
+            name: "suraj",
+            email: "suraj@gmail.com",
+        },
+    ]);
+});
+app.listen(3000, () => {
+    console.log("server is connected !!!!");
+
+})
+
+
+IN THIS WE CAME TO KNOW ABOUT HOW TO HIDE THE .HTML FORM THE ENGINE AND CREATE A 404 PAGE TO SHOW IT ON INVALID PAGES.
+
+const express = require('express');
+const path = require('path'); // it help to access the folders .
+
+const app = express();
+const publiPath = path.join(__dirname, 'public');
+
+// app.use(express.static(publiPath));  //here static is used becuase it render the static files and use always use as middleware.
+
+app.get('/', (req, res) => {
+    res.sendFile(`${publiPath}/index.html`);
+});  // we use this because it will not .html in our url that nobody know on which platform we created our site.
+
+app.get('/about', (req, res) => {
+    res.sendFile(`${publiPath}/about.html`);
+});
+
+app.get('/help', (req, res) => {
+    res.sendFile(`${publiPath}/help.html`);
+})
+app.get('*', (req, res) => {
+    res.sendFile(`${publiPath}/404.html`);
+})
+
+
+
+app.listen(3000, () => {
+    console.log("server is connected !!!!");
+
+})
