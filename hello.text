@@ -1,1 +1,140 @@
-hello world
+First push --------------basic work
+
+// const fs = require("fs");
+// const app = require("./app")
+
+// // console.log(app.c(7, 8));
+
+
+// const myArr = [1, 2, 3, 4, 3, 2, 5, 2, 5];
+
+// let result = myArr.filter((items) => {
+//     // console.log(items > 3);
+//     return items < 3;
+// })
+
+// // console.log(result);
+
+
+// // fs.writeFileSync("hello.text", "hello world"); 
+
+// console.log(__filename);
+
+
+
+// Basic api push  ========================================= (PENDING)
+
+// const data = require('./data');
+// const express = require('express');
+// const app = express();
+
+// app.get("/", (req, res) => {
+//     res.send(data);
+// });
+
+// app.listen(3000, () => {
+//     console.log("server is running on port 3000");
+// })
+
+
+
+
+// Getting input from command line =========================================(PENDING)
+// ===EASY METHOD ================
+// const fs = require("fs");
+
+// const createdFile = process.argv;
+
+// fs.writeFileSync(createdFile[2], createdFile[3]);
+
+
+// PROFESSIONAL METHOD =============
+
+const fs = require("fs");
+
+const createdFile = process.argv;
+
+if (createdFile[2] == "add") {
+    fs.writeFileSync(createdFile[3], createdFile[4]);
+} else if (createdFile[2] == "remove") {
+    fs.unlinkSync(createdFile[3]);
+} else {
+    console.log("input error");
+} 
+
+(
+    Log of the text here =============================================
+suraj@suraj-IdeaPad-3-15IAU7:~/node_tuts$ node index.js apple.txt "this is a fruit"
+suraj@suraj-IdeaPad-3-15IAU7:~/node_tuts$ node index.js add orange.text "this is a color and a fruit"
+input error
+suraj@suraj-IdeaPad-3-15IAU7:~/node_tuts$ node index.js add orange.text "this is a color and a fruit"
+suraj@suraj-IdeaPad-3-15IAU7:~/node_tuts$ node index.js remove orange.txt
+node:internal/fs/utils:356
+    throw err;
+    ^
+
+Error: ENOENT: no such file or directory, unlink 'orange.txt'
+    at Object.unlinkSync (node:fs:1881:3)
+    at Object.<anonymous> (/home/suraj/node_tuts/index.js:22:8)
+    at Module._compile (node:internal/modules/cjs/loader:1364:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1422:10)
+    at Module.load (node:internal/modules/cjs/loader:1203:32)
+    at Module._load (node:internal/modules/cjs/loader:1019:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:128:12)
+    at node:internal/main/run_main_module:28:49 {
+  errno: -2,
+  syscall: 'unlink',
+  code: 'ENOENT',
+  path: 'orange.txt'
+}
+
+Node.js v18.20.4
+suraj@suraj-IdeaPad-3-15IAU7:~/node_tuts$ node index.js remove orange.text "this is a color and a fruit"
+suraj@suraj-IdeaPad-3-15IAU7:~/node_tuts$ 
+)
+
+// CREATING FILES INSIDE A DIRECTORY WITH THE HELP OF PATH MODULE AND GETTING THEM.=====================================
+
+const fs = require('fs');
+const path = require('path');
+
+const dirPath = path.join(__dirname, "files");
+// for (i = 0; i < 5; i++) {
+//     fs.writeFileSync(dirPath + "/hello" + i + ".txt", "Hello World!",)
+// }
+
+fs.readdir(dirPath, (err, files) => {
+    files.forEach((items) => {
+        console.log(items[2]);
+    })
+})
+
+
+// // CRUD OPERATIONS (create read update delete);===================================================
+
+// const fs = require('fs');
+// const path = require('path');
+// const dirPath = path.join(__dirname, 'crud');
+// const filePath = `${dirPath}/apple.text`  // we make it a constatnt for using multiple times.
+
+// // fs.writeFileSync(filePath, "Hello world this is crud tutorial")   create a file
+
+// // fs.readFile(filePath, "utf8", (error, items) => {  // utf8 we are using because it will not make the result in buffer.
+// //     console.log(items);
+
+// // })
+
+// // fs.appendFile(filePath, " .Crud operation in must neede here", (err) => {
+// //     console.log(err);
+
+// // })   // This is used for update in file.
+
+// // fs.rename(filePath, `${dirPath}/banana.text`, (err) => {
+// //     console.log(err);
+
+// // })   // used to rename the file
+
+// // fs.unlink(filePath, (err) => {
+// //     console.log(err);
+
+// // }) // used to delete the file.

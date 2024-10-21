@@ -27,3 +27,11 @@ Example of Single-Threaded Languages:
 Some programming environments are traditionally single-threaded by design, but this doesn't mean they are strictly limited to that. They can simulate concurrency (such as through async programming, which is non-blocking but not truly parallel in a single thread).
 
 JavaScript: One of the most notable examples of a single-threaded language. JavaScript runs in a single thread, especially in browser environments. It uses asynchronous programming (with callbacks, promises, and async/await) to handle tasks like I/O operations without blocking the thread.
+
+# The process.argv reffers to argument vector if we console it .It give us 2 output (1.Where node is downloaded).(2.Frome where are we running it).And if we give some other statements after that it will print it also.
+
+console.log(process.argv);
+
+# The path module in Node.js provides utilities for working with file and directory paths. It allows you to interact with file system paths in a cross-platform way, handling things like concatenating paths, resolving relative paths, and extracting parts of a path (like the directory name or file extension).
+
+# This path module help to find the path of the directory and then create a file there with the help of fs.
