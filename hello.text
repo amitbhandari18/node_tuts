@@ -261,3 +261,90 @@ app.listen(3000, () => {
     console.log("server is connected !!!!");
 
 })
+
+
+These are to apply middleware to our app and single routes.
+
+const express = require('express');
+const app = express();
+
+const reqFilter = (req, res, next) => {
+    if (!req.query.age) {
+        res.send("Please provide your age")
+    } else if (req.query.age < 18) {
+        res.send("You are too young");
+    } else {
+        next();
+    }
+}
+
+app.use(reqFilter);  // if we  use middleware like this it became apllication lvl middleare and applied on every routes.
+
+// //By this process we can also apply single routed middle ware.
+// app.get("/", reqFilter, (req, res) => {
+//     res.send("Hello World");
+// });
+
+// ===================================================================
+app.get("/", (req, res) => {
+    res.send("Hello World");
+});
+
+app.get("/users", (req, res) => {
+    res.send("User World");
+})
+
+app.listen(3000, () => {
+    console.log("Server ready");
+
+})
+
+If we want to apply middleware to multiple routes then we have to use route.get instead of app.get.
+and at last we have to do app.use("/",route); 
+Group route req.
+
+const express = require('express');
+const app = express();
+const routes = express.Router();
+
+const reqFilter = (req, res, next) => {
+    if (!req.query.age) {
+        res.send("Please provide your age")
+    } else if (req.query.age < 18) {
+        res.send("You are too young");
+    } else {
+        next();
+    }
+}
+
+// app.use(reqFilter);  // if we  use middleware like this it became apllication lvl middleare and applied on every routes.
+routes.use(reqFilter);
+
+// //By this process we can also apply single routed middle ware.
+// app.get("/", reqFilter, (req, res) => {
+//     res.send("Hello World");
+// });
+
+// ===================================================================
+app.get("/", (req, res) => {
+    res.send("Hello World");
+});
+
+app.get("/users", (req, res) => {
+    res.send("User World");
+});
+routes.get("/about", (req, res) => {
+    res.send("about World");
+});
+
+routes.get("/help", (req, res) => {
+    res.send("help World");
+});
+
+app.use("/", routes);
+
+app.listen(3000, () => {
+    console.log("Server ready");
+
+})
+

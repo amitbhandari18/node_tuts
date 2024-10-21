@@ -67,3 +67,5 @@ The callback is then moved to the call stack, where it runs, logging "Timer done
 
 If the call stack is empty, the event loop will push the first task from the callback queue onto the stack.
 The event loop ensures non-blocking behavior, allowing Node.js to handle other operations (e.g., timers, file system calls) while waiting for asynchronous tasks to complete.
+
+# Middleware are the function with the help of these we can modify and control the req and res.
